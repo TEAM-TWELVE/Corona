@@ -1,2 +1,2 @@
 # Corona
-Microservice providing location based corona status 
+Microservice providing corona status per country
