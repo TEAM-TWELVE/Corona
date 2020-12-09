@@ -20,16 +20,12 @@ country = parties_list.find("strong").get_text()
 
 colorUrl = parties_list.find("img").get('src')  
 colorNumber = colorUrl[-5] # colors: 1:green, 2: yellow, 3:red
-color = "red"
-if colorNumber == 1:
-	color = "green"
-elif colorNumber == 2:
-	color = "yellow"	
-
 
 #cases = parties_list.strong.find_next("strong").get_text()
 
-print(parties_list.prettify())
+
+#print(parties_list.prettify())
 
 print(country)
-print(color)
+print(colorNumber)
+
