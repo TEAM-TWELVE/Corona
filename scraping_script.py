@@ -25,8 +25,6 @@ for i in covid_soup:
 	covid_dict[country] = color
 
 
-for country in covid_dict:
-	print(country, covid_dict[country])
-
-
+#for country in covid_dict:
+#	print(country, covid_dict[country])
 
