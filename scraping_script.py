@@ -1,4 +1,3 @@
-
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -12,19 +11,22 @@ html = driver.execute_script("return document.documentElement.outerHTML")
 
 #Use BeautifulSoup for working with html
 soup = BeautifulSoup(html, "html.parser")
+covid_soup = soup.find("div", id="ember44").div.nav.find_all("span", class_="flex-horizontal")
 
 
-parties_list = soup.find("div", id="ember44").find_next("div").nav.span.div.find_next("div")
+covid_dict = {}
 
-country = parties_list.find("strong").get_text()
+#fetch countries with corr
+for i in covid_soup:
+	country = i.find("strong").get_text(strip=True)
+	imgURL = i.p.find_next("p").find_next("p").find("img").get('src') 
+	color = imgURL[-5] # colors: 1:green, 2: yellow, 3:red
+	
+	covid_dict[country] = color
 
-colorUrl = parties_list.find("img").get('src')  
-colorNumber = colorUrl[-5] # colors: 1:green, 2: yellow, 3:red
+
+for country in covid_dict:
+	print(country, covid_dict[country])
 
 
-cases = parties_list.strong.find_next("strong").get_text()
 
-#print(parties_list.prettify())
-
-print(country)
-print(colorNumber)
