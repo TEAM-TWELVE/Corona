@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
+import json
 
 
 url = "https://who.maps.arcgis.com/apps/opsdashboard/index.html#/ead3c6475654481ca51c248d52ab9c61"
@@ -20,7 +21,7 @@ covid_soup = soup.find("div", id="ember44").div.nav.find_all("span", class_="fle
 
 covid_dict = {}
 
-#fetch countries with corr
+
 for i in covid_soup:
 	country = i.find("strong").get_text(strip=True)
 	imgURL = i.p.find_next("p").find_next("p").find("img").get('src') 
@@ -33,5 +34,8 @@ for country in covid_dict:
 	print(country, covid_dict[country])
 
 
+
+json_string = json.dumps(covid_dict)
+print(json_string)
 
 
