@@ -15,15 +15,25 @@ delta_t=y-x
 
 secs=delta_t.total_seconds()
 
+
 def getCovidColor(imgURL):
-    print(imgURL)
-    #number = imageURL[-5] # colors: 1:green, 2: yellow, 3:red
-    #if number == 1:
-     #   return "green"
-    #elif number == 2:
-     #   return "yellow"
-    #elif number == 3:
-     #   return "red"
+    number = imgURL[-5] # colors: 1:green, 2: yellow, 3:red
+    if number == "1":
+        return "green"
+    elif number == "2":
+        return "yellow"
+    elif number == "3":
+        return "red"
+    return "blue"
+
+
+def cleanCountryName(country):
+    if country[-1] == "*":
+        country = country[:-2]
+        return country
+    return country
+
+ 
         
 
 def web_scrape():
@@ -37,12 +47,12 @@ def web_scrape():
     covid_soup = soup.find("div", id="ember44").div.nav.find_all("span", class_="flex-horizontal")
     covid_dict = {}
     for i in covid_soup:
-	    country = i.find("strong").get_text(strip=True)
-	    imgURL = i.p.find_next("p").find_next("p").find("img").get('src') 
+        country = i.find("strong").get_text(strip=True)
+        country = cleanCountryName(country)
+        imgURL = i.p.find_next("p").find_next("p").find("img").get('src') 
         color = getCovidColor(imgURL)
-	   #color = imgURL[-5] # colors: 1:green, 2: yellow, 3:red
-	    covid_dict[country] = color
-    with open('data.json', 'w') as fp:
+        covid_dict[country] = color
+    with open('aaaa.json', 'w') as fp:
         json.dump(covid_dict, fp)
 
 
@@ -56,7 +66,7 @@ app = Flask(__name__)
 api = Api(app)
 
 #data for end point  
-f = open('data.json',)
+f = open('aaaa.json',)
 thisdict =  json.load(f) 
 f.close() 
 
