@@ -34,8 +34,6 @@ for country in covid_dict:
 	print(country, covid_dict[country])
 
 
-
-json_string = json.dumps(covid_dict)
+#print
+json_string = json.dumps(covid_dict, indent=2)
 print(json_string)
-
-
