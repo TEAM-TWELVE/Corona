@@ -35,7 +35,7 @@ def clean_country_name(country):
 
 
 def save_to_json(covid_dict):
-    #prepare json file to be updated
+    #prepare json file ready for updates
     currenct_json = open(json_file)
     json_object = json.load(currenct_json)
     currenct_json.close()
@@ -43,12 +43,13 @@ def save_to_json(covid_dict):
     for dict_country, dict_color in covid_dict.items():
         json_color = json_object.get(dict_country)
         if json_color != dict_color:
+            print("fff")
             json_object[dict_country] = dict_color
             #log change
             print(dict_country, " .. has changed from ", json_color, " to ", dict_color)
-    #close and save json file        
-    currenct_json = open (json_file, "w")
-    json.dump(json_object, currenct_json)
+            #close and save json file        
+            currenct_json = open (json_file, "w")
+            json.dump(json_object, currenct_json)
     currenct_json.close()
             
 
