@@ -35,7 +35,7 @@ def clean_country_name(country):
 
 
 def save_to_json(covid_dict):
-    #prepare json file ready for updates
+    #prepare json file to be updated
     currenct_json = open(json_file)
     json_object = json.load(currenct_json)
     currenct_json.close()
@@ -107,9 +107,7 @@ if __name__ == "__main__":
     app.run()
 
 
-
-
-
+#
  
 
 
