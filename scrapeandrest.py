@@ -57,6 +57,7 @@ def save_to_json(covid_dict):
 
 def web_scrape():
     url = "https://who.maps.arcgis.com/apps/opsdashboard/index.html#/ead3c6475654481ca51c248d52ab9c61"
+    #make firefox headless
     fireFoxOptions = webdriver.FirefoxOptions()
     fireFoxOptions.set_headless()
     #fetch html using selenium
@@ -75,9 +76,7 @@ def web_scrape():
         color = get_covid_color(imgURL)
         covid_dict[country] = color
     save_to_json(covid_dict)
-    #open json file as readable
-    #with open(json_file, 'w') as fp:
-    #    json.dump(covid_dict, fp)
+    
 
 
 
