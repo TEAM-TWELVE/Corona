@@ -43,7 +43,6 @@ def save_to_json(covid_dict):
     for dict_country, dict_color in covid_dict.items():
         json_color = json_object.get(dict_country)
         if json_color != dict_color:
-            print("fff")
             json_object[dict_country] = dict_color
             #log change
             print(dict_country, " .. has changed from ", json_color, " to ", dict_color)
@@ -58,8 +57,10 @@ def save_to_json(covid_dict):
 
 def web_scrape():
     url = "https://who.maps.arcgis.com/apps/opsdashboard/index.html#/ead3c6475654481ca51c248d52ab9c61"
+    fireFoxOptions = webdriver.FirefoxOptions()
+    fireFoxOptions.set_headless()
     #fetch html using selenium
-    driver = webdriver.Firefox()
+    driver = webdriver.Firefox(firefox_options=fireFoxOptions)
     driver.get(url)
     time.sleep(20)
     html = driver.execute_script("return document.documentElement.outerHTML")
@@ -76,7 +77,7 @@ def web_scrape():
     save_to_json(covid_dict)
     #open json file as readable
     #with open(json_file, 'w') as fp:
-     #   json.dump(covid_dict, fp)
+    #    json.dump(covid_dict, fp)
 
 
 
@@ -106,12 +107,4 @@ api.add_resource(coronaStatus, "/coronastatus")
 if __name__ == "__main__":
     #app.run(debug=True)
     app.run()
-
-
-#
- 
-
-
-
-
 
